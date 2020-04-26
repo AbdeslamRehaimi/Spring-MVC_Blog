@@ -1,48 +1,54 @@
 package com.master4.entities;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+@FieldDefaults(level= AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter @Getter
 @Entity
 @Table(name = "articles")
-public class Article {
+public class Article implements Serializable {
+
+    static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    long id;
 
     @Size(min=3, message = "minimum 3 lettre")
-    @Column(name = "title" )
-    private String title;
+    @NotBlank(message = "Vous devez indiquer un titre!")
+    @Column(name = "title", length = 150 )
+    String title;
 
     @Column(name = "body" )
+    @NotBlank(message = "Ajouter un contenu !")
     @Type(type="text")
-    private String body;
+    String body;
 
     @Column(name="published",columnDefinition = "int default 0")
-    private Boolean published;
+    Boolean published;
 
     @Column(name = "created")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
+    Date created;
 
     @Column(name = "modified")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date modified ;
+    Date modified ;
 
     @ManyToOne
-    private User user;
+    User user;
 
     @Size(min=1,message = "selectionner au moins une tag")
     @ManyToMany

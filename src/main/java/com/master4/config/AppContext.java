@@ -35,7 +35,6 @@ public class AppContext {
         dataSource.setDriverClassName(environment.getProperty("jdbc.DriverClassName"));
         dataSource.setUrl(environment.getProperty("jdbc.Url"));
         dataSource.setUsername(environment.getProperty("jdbc.Username"));
-        dataSource.setPassword(environment.getProperty("jdbc.Password"));
         return dataSource;
     }
 

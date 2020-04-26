@@ -1,39 +1,42 @@
 package com.master4.entities;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-
+@FieldDefaults(level= AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter @Getter
 @Entity
 @Table(name="tags")
-public class Tag {
+public class Tag implements Serializable {
+
+    static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    long id;
 
 
     @Column(name = "name", nullable = false, unique = true, length = 150)
-    private String  title;
+    @NotBlank(message = "Vous devez indiquer un type du tag !")
+    String  title;
 
     @Column(name = "created")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
+    Date created;
 
     @Column(name = "modified")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date modified ;
+    Date modified ;
 
 
     @ManyToMany(mappedBy="tagList")
@@ -41,7 +44,7 @@ public class Tag {
 
 
     @Transient
-    private Boolean used;
+    Boolean used;
 
     public Tag(long id) {
         this.id=id;
