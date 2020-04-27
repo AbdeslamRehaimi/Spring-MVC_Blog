@@ -70,7 +70,14 @@
                     <br><br><br>
                     <div >
                         <a style="float: left;" class="btn btn-danger" href="${pageContext.request.contextPath}/article/" >Returne</a>
-                        <a style="float: right;" class="btn btn-primary" href="${pageContext.request.contextPath}/article/add/${article.id}" >Modifier</a>
+                    <c:choose>
+                        <c:when test="${role == 'Admin'}">
+                            <a style="float: right;" class="btn btn-primary" href="${pageContext.request.contextPath}/article/add/${article.id}" >Modifier</a>
+                        </c:when>
+                        <c:when test="${role == 'Writer'}">
+                            <a style="float: right;" class="btn btn-primary" href="${pageContext.request.contextPath}/article/add/${article.id}" >Modifier</a>
+                        </c:when>
+                    </c:choose>
                      </div>
                     <div class="card" style="margin-top: 50px">
                         <div class="card-header" style="text-align: center"><h1 style="color: black;font-family: auto;">${article.title}</h1></div>

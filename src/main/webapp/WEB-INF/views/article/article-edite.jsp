@@ -109,7 +109,15 @@
 
 
                                 <div class="form-group col-md-12">
-                                    <form:button class="btn btn-success btn-block">Valider</form:button>
+                                    <c:choose>
+                                        <c:when test="${role == 'Admin'}">
+                                            <form:button class="btn btn-success btn-block">Valider</form:button>
+                                        </c:when>
+                                        <c:when test="${role == 'Writer'}">
+                                            <form:button class="btn btn-success btn-block">Valider</form:button>
+                                        </c:when>
+                                    </c:choose>
+
                                 </div>
                             </div>
                         </form:form>

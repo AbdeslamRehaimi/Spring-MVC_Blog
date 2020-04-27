@@ -97,10 +97,19 @@
                                     <td>${item.prenom}</td>
                                     <td>${item.email} </td>
                                     <td>${item.role} </td>
-                                    <td>
-                                        <a href="${pageContext.request.contextPath}/user/delete/${pageable.number}/${item.id}" class="btn btn-danger"
-                                           onclick="if (!(confirm('Voulez vous vraiment supprimer ce utilisateur?'))) return false">Delete</a>
-                                        <a href="${pageContext.request.contextPath}/user/add/${item.id}" class="btn btn-success">Modifier</a>
+                                    <c:choose>
+                                        <c:when test="${role == 'Admin'}">
+                                            <a href="${pageContext.request.contextPath}/user/delete/${pageable.number}/${item.id}" class="btn btn-danger"
+                                               onclick="if (!(confirm('Voulez vous vraiment supprimer ce utilisateur?'))) return false">Delete</a>
+                                            <a href="${pageContext.request.contextPath}/user/add/${item.id}" class="btn btn-success">Modifier</a>
+                                        </c:when>
+                                            <c:when test="${role == 'Writer'}">
+                                                <a disabled="true" href="${pageContext.request.contextPath}/user/delete/${pageable.number}/${item.id}" class="btn btn-danger"
+                                                   onclick="if (!(confirm('Voulez vous vraiment supprimer ce utilisateur?'))) return false">Delete</a>
+                                                <a disabled="true"  href="${pageContext.request.contextPath}/user/add/${item.id}" class="btn btn-success">Modifier</a>
+                                            </c:when>
+                                    </c:choose>
+
                                     </td>
                                 </tr>
 

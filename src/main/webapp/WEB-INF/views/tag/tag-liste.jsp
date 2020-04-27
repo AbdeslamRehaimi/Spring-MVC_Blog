@@ -54,13 +54,26 @@
         <div class="row">
             <div class="col-md-12">
 
-                <input type="button" style="float: left; border-radius: 50px;" value="Nouveau Tag"
-                       onclick="window.location.href='${pageContext.request.contextPath}/tag/add'; return false;"
-                       class="btn btn-primary" />
+                <c:choose>
+                    <c:when test="${role == 'Admin'}">
+                        <input type="button" style="float: left; border-radius: 50px;" value="Nouveau Tag"
+                               onclick="window.location.href='${pageContext.request.contextPath}/tag/add'; return false;"
+                               class="btn btn-primary" />
 
-                <input type="button" style="text-align: center; border-radius: 50px;" value="Liste Users"
-                       onclick="window.location.href='${pageContext.request.contextPath}/user/list'; return false;"
-                       class="btn btn-primary" />
+                        <input type="button" style="text-align: center; border-radius: 50px;" value="Liste Users"
+                               onclick="window.location.href='${pageContext.request.contextPath}/user/list'; return false;"
+                               class="btn btn-primary" />
+                    </c:when>
+                    <c:when test="${role == 'Writer'}">
+                        <input type="button" style="float: left; border-radius: 50px;" value="Nouveau Tag"
+                               onclick="window.location.href='${pageContext.request.contextPath}/tag/add'; return false;"
+                               class="btn btn-primary" />
+
+                        <input disabled="true" type="button" style="text-align: center; border-radius: 50px;" value="Liste Users"
+                               onclick="window.location.href='${pageContext.request.contextPath}/user/list'; return false;"
+                               class="btn btn-primary" />
+                    </c:when>
+                </c:choose>
 
                 <input type="button" style="float: right;border-radius: 50px;" value="Liste Articles"
                        onclick="window.location.href='${pageContext.request.contextPath}/article/'; return false;"
@@ -85,9 +98,20 @@
                                     <td>${item.created}</td>
                                     <td>${item.modified} </td>
                                     <td>
-                                        <a href="${pageContext.request.contextPath}/tag/delete/${pageable.number}/${item.id}" class="btn btn-danger"
-                                           onclick="if (!(confirm('Voulez vous vraiment supprimer ce Tag?'))) return false">Delete</a>
-                                        <a href="${pageContext.request.contextPath}/tag/add/${item.id}" class="btn btn-success">Modifier</a>
+                                        <c:choose>
+                                        <c:when test="${role == 'Admin'}">
+                                            <a href="${pageContext.request.contextPath}/tag/delete/${pageable.number}/${item.id}" class="btn btn-danger"
+                                               onclick="if (!(confirm('Voulez vous vraiment supprimer ce Tag?'))) return false">Delete</a>
+                                            <a href="${pageContext.request.contextPath}/tag/add/${item.id}" class="btn btn-success">Modifier</a>
+                                        </c:when>
+                                            <c:when test="${role == 'Writer'}">
+                                                <a href="${pageContext.request.contextPath}/tag/delete/${pageable.number}/${item.id}" class="btn btn-danger"
+                                                   onclick="if (!(confirm('Voulez vous vraiment supprimer ce Tag?'))) return false">Delete</a>
+                                                <a href="${pageContext.request.contextPath}/tag/add/${item.id}" class="btn btn-success">Modifier</a>
+                                            </c:when>
+                                        </c:choose>
+
+
                                     </td>
                                 </tr>
                             </c:forEach>

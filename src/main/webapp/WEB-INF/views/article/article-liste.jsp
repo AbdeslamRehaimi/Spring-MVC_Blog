@@ -61,17 +61,39 @@
         <div class="row">
             <div class="col-md-12">
 
-                <input type="button" style="float: left; border-radius: 50px;" value="Nouveau Article"
-                       onclick="window.location.href='${pageContext.request.contextPath}/article/add'; return false;"
-                       class="btn btn-primary" />
+                <c:choose>
+                    <c:when test="${role == 'Admin'}">
+                        <input type="button" style="float: left; border-radius: 50px;" value="Nouveau Article"
+                               onclick="window.location.href='${pageContext.request.contextPath}/article/add'; return false;"
+                               class="btn btn-primary" />
+                        <input type="button" style="text-align: center; border-radius: 50px;" value="Tags List"
+                               onclick="window.location.href='${pageContext.request.contextPath}/tag/'; return false;"
+                               class="btn btn-primary" />
+                    </c:when>
+                    <c:when test="${role == 'Writer'}">
+                        <input type="button" style="float: left; border-radius: 50px;" value="Nouveau Article"
+                               onclick="window.location.href='${pageContext.request.contextPath}/article/add'; return false;"
+                               class="btn btn-primary" />
+                        <input type="button" style="text-align: center; border-radius: 50px;" value="Tags List"
+                               onclick="window.location.href='${pageContext.request.contextPath}/tag/'; return false;"
+                               class="btn btn-primary" />
+                    </c:when>
+                </c:choose>
 
-                <input type="button" style="text-align: center; border-radius: 50px;" value="Tags List"
-                       onclick="window.location.href='${pageContext.request.contextPath}/tag/'; return false;"
-                       class="btn btn-primary" />
+                <c:choose>
+                    <c:when test="${role == 'Admin'}">
+                        <input type="button" style="float: right;border-radius: 50px;" value="Consultation Users"
+                               onclick="window.location.href='${pageContext.request.contextPath}/user/list'; return false;"
+                               class="btn btn-primary" />
+                    </c:when>
+                    <c:when test="${role == 'Writer'}">
+                        <input disabled="true" type="button" style="float: right;border-radius: 50px;" value="Consultation Users"
+                               onclick="window.location.href='${pageContext.request.contextPath}/user/list'; return false;"
+                               class="btn btn-primary" />
+                    </c:when>
+                </c:choose>
 
-                <input type="button" style="float: right;border-radius: 50px;" value="Consultation Users"
-                       onclick="window.location.href='${pageContext.request.contextPath}/user/list'; return false;"
-                       class="btn btn-primary" />
+
 
                 <br/><br/>
             </div>
