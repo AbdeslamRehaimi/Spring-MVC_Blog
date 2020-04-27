@@ -8,12 +8,16 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    public Page<User> getAllUser(Optional<Integer> pageNo, Integer pageSize, String sortBy);
-    public List<User> getAllUser();
+    Page<User> getAllUser(Optional<Integer> pageNo, Integer pageSize, String sortBy);
+    List<User> getAllUser();
 
     User findById(long id) throws ResourceNotFoundException;
 
     void save(User user);
 
     void deleteById(long id);
+
+    public boolean loginCheck(String email , String password);
+
+    public User findByEmail(String email);
 }

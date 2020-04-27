@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
@@ -29,29 +30,33 @@ public class User implements Serializable {
     @Column(name="nom", nullable = false, unique = true, length = 150 )
     @NotBlank(message = "Vous devez indiquer votre nom !")
     @Size(min=3, message = "minimum 3 lettre")
-    @Email
+    @NotNull
     String nom;
 
     @Column(name="prenom", nullable = false, unique = true, length = 150 )
     @NotBlank(message = "Vous devez indiquer votre prenom !")
     @Size(min=3, message = "minimum 3 lettre")
-    @Email
+    @NotNull
     String prenom;
 
     @Column(name="email", nullable = false, unique = true)
-    @NotBlank(message = "Vous devez indiquer l'email !")
+    @NotBlank(message = "Vous devez indiquer votre email !")
     @Email
+    @NotNull
     String email;
 
     @Column(name="password", nullable = false, length = 150 )
     @NotBlank(message = "Vous devez indiquer votre mot de passe !")
     @Size(min=6, message = "minimum 6 lettre")
+    @NotNull
     String password;
 
     @Transient
-    @Size(min=6, message = "minimum 6 lettre")
-    @NotBlank(message = "Retaper  le mot de passe !!")
     String confirmedPassword;
+
+    @Column(name = "image")
+    private String image;
+
 
     @Column(name="role")
     String role;
@@ -70,4 +75,5 @@ public class User implements Serializable {
     public User(long id) {
         this.id=id;
     }
+
 }

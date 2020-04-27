@@ -39,6 +39,9 @@ public class Article implements Serializable {
     @Column(name="published",columnDefinition = "int default 0")
     Boolean published;
 
+    @Column(name = "image")
+    private String image;
+
     @Column(name = "created")
     @Temporal(TemporalType.TIMESTAMP)
     Date created;
@@ -46,6 +49,7 @@ public class Article implements Serializable {
     @Column(name = "modified")
     @Temporal(TemporalType.TIMESTAMP)
     Date modified ;
+
 
     @ManyToOne
     User user;

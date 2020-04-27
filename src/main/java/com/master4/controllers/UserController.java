@@ -3,6 +3,7 @@ package com.master4.controllers;
 
 import com.master4.entities.User;
 import com.master4.exceptions.ResourceNotFoundException;
+import com.master4.security.SHA1;
 import com.master4.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.sql.Timestamp;
 import java.util.Optional;
 import org.aspectj.lang.annotation.Aspect;
 
@@ -24,7 +26,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = {"/","/page/{id}"})
+    @GetMapping("/page/{id}")
     public String home(@PathVariable(name="id",required = false) Optional<Integer> id, ModelMap model)
     {
         Page<User> pages = userService.getAllUser(id, 4, "id");
@@ -36,23 +38,23 @@ public class UserController {
     @GetMapping("/add")
     public String add(ModelMap model,User User) {
         model.addAttribute("User", User);
-        return "user/add";
+        return "user/user-edite";
     }
 
     @GetMapping("/add/{id}")
     public String edit(@PathVariable("id") long id, ModelMap model) throws ResourceNotFoundException {
         model.addAttribute("User", userService.findById(id));
-        return "user/add";
+        return "user/user-edite";
     }
 
     @PostMapping("/save")
-    public String saveTag(@Valid @ModelAttribute("User") User User, BindingResult result, ModelMap model) throws ResourceNotFoundException {
+    public String saveUser(@Valid @ModelAttribute("User") User user, BindingResult result, ModelMap model) throws ResourceNotFoundException {
         if(result.hasErrors()){
-            model.addAttribute("User",User);
-            return "user/add";
+            model.addAttribute("User",user);
+            return "user/user-register";
         }
-        userService.save(User);
-        return "redirect:/User/";
+        userService.save(user);
+        return "redirect:/user/";
     }
 
     @GetMapping("/delete/{page}/{id}")
@@ -61,15 +63,64 @@ public class UserController {
         return "redirect:/user/page/"+page;
     }
 
+    @GetMapping(value = {""})
+    public String index( ModelMap model ,User user){
+        model.addAttribute("user", user);
+        return "user/user-login";
+    }
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute("user") User user, BindingResult result, ModelMap model , HttpSession session) throws ResourceNotFoundException {
+    @PostMapping(value = {"/login"})
+    public String login(@ModelAttribute("user") User user, BindingResult result, ModelMap model , HttpSession session) throws ResourceNotFoundException, Exception {
         if(result.hasErrors()){
             model.addAttribute("user",user);
             System.out.println(result);
-            return "user/login";
+            return "user/user-login";
         }
-        return "user/login";
+
+        String hachedPass = SHA1.getSHA1(user.getPassword());
+
+        if(userService.loginCheck(user.getEmail(), hachedPass)){
+            System.out.println("Welcome Back");
+            session.setAttribute("fullName", userService.findByEmail(user.getEmail()).getNom()+" " + userService.findByEmail(user.getEmail()).getPrenom());
+            session.setAttribute("role", userService.findByEmail(user.getEmail()).getRole());
+            return "redirect:/article/";
+        }else{
+            user.setEmail(null);
+            user.setPassword(null);
+            System.out.println("Unvailable");
+            return "user/user-login";
+        }
+
     }
+
+    @GetMapping(value = {"/register"})
+    public String register( ModelMap model ,User user){
+        model.addAttribute("user", user);
+        return "user/user-register";
+    }
+
+    @PostMapping(value = {"/inscription"})
+    public String Inscription(@Valid @ModelAttribute("user") User user, BindingResult result, ModelMap model , HttpSession session) throws ResourceNotFoundException {
+        if(result.hasErrors()){
+            model.addAttribute("user",user);
+            System.out.println(result);
+            return "user/user-register";
+        }
+        try{
+            user.setPassword(SHA1.getSHA1(user.getPassword()));
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            user.setCreated(timestamp);
+            user.setRole("Writer");
+            userService.save(user);
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            user.setPassword(null);
+            return "user/user-login";
+        }
+
+
+    }
+
 
 }

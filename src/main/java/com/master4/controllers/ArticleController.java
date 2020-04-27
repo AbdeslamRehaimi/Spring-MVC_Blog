@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(value = {"","/article"})
+@RequestMapping("/article")
 public class ArticleController {
 
     @Autowired
@@ -42,7 +42,7 @@ public class ArticleController {
     {
             Page<Article> pages = articleService.getAllArticles(id, 3, "id");
             model.addAttribute("pageable", pages);
-        return "article/home";
+        return "article/article-liste";
     }
 
     @RequestMapping("/view/{id}")

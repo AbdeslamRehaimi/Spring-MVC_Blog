@@ -59,4 +59,17 @@ public class UserServiceImpl implements UserService {
     public void deleteById(long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    @Transactional
+    public boolean loginCheck(String email, String password) {
+        return userRepository.findUserByLogin(email, password) != null;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
+
+
 }
