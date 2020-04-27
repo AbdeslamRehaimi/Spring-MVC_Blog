@@ -42,7 +42,18 @@
 </head>
 <body>
     <div class="fluid">
-        <jsp:include page="../includes/main-navbar.jsp" />
+        <c:choose>
+            <c:when test="${role == 'Admin'}">
+                <jsp:include page="../includes/main-navbar.jsp" />
+            </c:when>
+            <c:when test="${role == 'Writer'}">
+                <jsp:include page="../includes/main-navbar.jsp" />
+            </c:when>
+            <c:otherwise>
+                <jsp:include page="../includes/visitor-navbar.jsp" />
+            </c:otherwise>
+        </c:choose>
+
         <div class="jumbotron jumbotron-fluid bg-cool-blue">
             <div class="container">
                 <h1 class="display-4 aColor">

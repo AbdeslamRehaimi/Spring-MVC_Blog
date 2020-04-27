@@ -1,6 +1,7 @@
 package com.master4.entities;
 
 
+import com.master4.validators.PasswordConf;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -19,9 +20,10 @@ import java.util.List;
 @Setter @Getter
 @Entity
 @Table(name="users")
+@PasswordConf(message = "Les deux password non identique !" ) //I made this validator to verifiy the password and confirmation pass are the same for inscription needs
 public class User implements Serializable {
 
-     static final long serialVersionUID = 1L;
+    static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,7 +53,9 @@ public class User implements Serializable {
     @NotNull
     String password;
 
+
     @Transient
+    @Size(min=6, message = "Les deux password non identique !")
     String confirmedPassword;
 
     @Column(name = "image")

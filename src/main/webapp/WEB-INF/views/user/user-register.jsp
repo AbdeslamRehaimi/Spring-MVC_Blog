@@ -55,7 +55,7 @@
                         <div class="form-group col-md-6 required  ">
                             <label>Retaper Password</label>
                             <form:input path="confirmedPassword" type="password" name="confirmedPassword" autocomplete="off" class="form-control is-invalid"></form:input>
-                            <form:errors path="confirmedPassword"  class="invalid-feedback"  cssStyle="color: red" />
+                            <form:errors path="confirmedPassword" class="invalid-feedback"  cssStyle="color: red" />
                         </div>
 
                         <div class="form-group col-sm-12 required ">
