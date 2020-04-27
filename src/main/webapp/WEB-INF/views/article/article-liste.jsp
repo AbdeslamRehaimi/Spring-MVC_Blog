@@ -17,7 +17,7 @@
     <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
     <style>
         .aColor {
-            color: #ffffff;
+            color: #000000;
         }
 
         .space_Section {
@@ -29,7 +29,7 @@
         }
 
         .bg-cool-blue {
-            background-color: #03579e!important;
+            background-color: #a0e5e8!important;
         }
 
         .icon-drop-user {
@@ -39,7 +39,11 @@
             margin-right: 50px;
         }
 
-
+        .article{
+            text-align: justify;
+            font-style: italic;
+            font-family: cursive;
+        }
     </style>
 </head>
 <body>
@@ -61,12 +65,12 @@
                        onclick="window.location.href='${pageContext.request.contextPath}/article/add'; return false;"
                        class="btn btn-primary" />
 
-                <input type="button" style="text-align: center; border-radius: 50px;" value="Edite Tag"
+                <input type="button" style="text-align: center; border-radius: 50px;" value="Tags List"
                        onclick="window.location.href='${pageContext.request.contextPath}/tag/'; return false;"
                        class="btn btn-primary" />
 
                 <input type="button" style="float: right;border-radius: 50px;" value="Consultation Users"
-                       onclick="window.location.href='${pageContext.request.contextPath}/users/'; return false;"
+                       onclick="window.location.href='${pageContext.request.contextPath}/user/list'; return false;"
                        class="btn btn-primary" />
 
                 <br/><br/>
@@ -76,26 +80,26 @@
         <div class="user-contents">
             <c:forEach items="${pageable.content}" var="item">
                 <!--Ã§a sera repeter plusieur fois-->
-                <div class="album-content">
+                <div class="user-contents">
                     <div class="container">
                         <div class="row">
                             <br><br>
                             <div class="col-md-4 col-sm-4 ">
-                                <h2>Album ${item.title}</h2>
+                                <h2>${item.title}</h2>
                                 <div class="blok1">
                                     <img src="<c:url value="/resources/images/users/${image}"/>" alt="image" class="albimage">
                                     <div style="display: block; margin: 35px; align-items: center">
                                         <img src="<c:url value="/resources/images/users/${image}"/>" class="user" width="80px" height="80px">
 
-                                        <a href="${pageContext.request.contextPath}/article/show/${item.id}" ><h2>${item.title}</h2></a>
+                                        <a href="${pageContext.request.contextPath}/article/view/${item.id}" ><h2>${item.user.nom} ${item.user.prenom}</h2></a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-8 col-sm-8">
-                                <a href="${pageContext.request.contextPath}/article/show/${item.id}" ><h2 style="color: #3ed400; text-align: center; font-family: none;">Lire l'article complet ...</h2></a>
-                                <table class="table table-bordered table-hover col-md-12 col-xl-12 col-sm-12">
+                                <a href="${pageContext.request.contextPath}/article/view/${item.id}" ><h2 style="color: #3ed400; text-align: center; font-family: none;">Lire l'article complet ...</h2></a>
+                                <div class="article">
                                         ${item.body}
-                                </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -112,22 +116,22 @@
                                 <ul class="pagination">
                                     <c:choose>
                                         <c:when test="${pageable.number !=0 }">
-                                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/album/page/${pageable.number-1 }">Previous</a></li>
+                                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/article/page/${pageable.number-1 }">Previous</a></li>
                                         </c:when>
                                     </c:choose>
                                     <c:forEach begin="0"   end="${pageable.totalPages -1}" var="i">
                                         <c:choose>
                                             <c:when test="${pageable.number ==i }">
-                                                <li class="page-item disabled"><a class="page-link" href="${pageContext.request.contextPath}/album/page/${i}">${i}</a></li>
+                                                <li class="page-item disabled"><a class="page-link" href="${pageContext.request.contextPath}/article/page/${i}">${i}</a></li>
                                             </c:when>
                                             <c:otherwise>
-                                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/album/page/${i}">${i}</a></li>
+                                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/article/page/${i}">${i}</a></li>
                                             </c:otherwise>
                                         </c:choose>
                                     </c:forEach>
                                     <c:choose>
                                         <c:when test="${pageable.number <pageable.totalPages-1 }">
-                                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/album/page/${pageable.number+1 }">Next</a></li>
+                                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/article/page/${pageable.number+1 }">Next</a></li>
                                         </c:when>
                                     </c:choose>
                                 </ul>
@@ -136,8 +140,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
 
     </div>

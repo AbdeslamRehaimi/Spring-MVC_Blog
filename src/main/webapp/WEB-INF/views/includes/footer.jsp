@@ -7,8 +7,7 @@
 --%>
 <!-- Footer -->
 <footer class="page-footer space_Section  bg-cool-blue">
-    <div style="color: #ffffff;" class="footer-copyright text-center py-3">© 2018 Copyright ||
-        <a style="color: #ffffff;" href="https://mdbootstrap.com/education/bootstrap/"> Master ISI</a>
+    <div style="color: #000000;" class="footer-copyright text-center py-3">Copyright © 2019 ||
+        <a style="color: #000000;" href="https://mdbootstrap.com/education/bootstrap/"> Master ISI</a>
     </div>
-
 </footer>

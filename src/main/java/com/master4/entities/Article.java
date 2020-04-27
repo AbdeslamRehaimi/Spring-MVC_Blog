@@ -60,6 +60,4 @@ public class Article implements Serializable {
             , inverseJoinColumns={@JoinColumn(referencedColumnName="id")})
     List<Tag> tagList;
 
-
-
 }

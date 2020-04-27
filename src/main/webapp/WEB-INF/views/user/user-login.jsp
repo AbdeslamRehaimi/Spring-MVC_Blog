@@ -26,17 +26,17 @@
                     <div class="card-body row">
                         <div class="form-group col-sm-12 required">
                             <label>Email</label>
-                            <form:input path="email" type="text" name="email" value="" class="form-control is-invalid"></form:input>
+                            <form:input path="email"  type="text" name="email" value="abdeslam.rehaimi@gmail.com" class="form-control is-invalid"></form:input>
                             <form:errors path="email"  class="invalid-feedback"  cssStyle="color: red" />
                         </div>
 
                         <div class="form-group col-md-12 required">
                             <label>Mot de pass</label>
-                            <form:input path="password" type="password" name="password" autocomplete="off" class="form-control is-invalid"></form:input>
+                            <form:input path="password" type="password" value="123456789" name="password" autocomplete="off" class="form-control is-invalid"></form:input>
                             <form:errors path="password"  class="invalid-feedback"  cssStyle="color: red" />
                         </div>
                         <div class="form-group col-md-12">
-                            <form:button class="btn btn-success btn-block">Login</form:button>
+                            <form:button class="btn btn-primary btn-block">Login</form:button>
                         </div>
                     </div>
                 </form:form>

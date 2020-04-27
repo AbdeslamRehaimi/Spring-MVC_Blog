@@ -23,6 +23,7 @@
                 <div class="card-header">Register</div>
                 <form:form action="${pageContext.request.contextPath}/inscription" cssClass="form-horizontal" method="post" modelAttribute="user">
                     <div class="card-body row">
+                        <form:input path="id" type="hidden" />
 
                         <div class="form-group col-md-6 required ">
                             <label>Nom</label>

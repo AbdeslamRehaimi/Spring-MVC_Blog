@@ -26,35 +26,46 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/page/{id}")
+    @GetMapping(value = {"/list", "/page/{id}"})
     public String home(@PathVariable(name="id",required = false) Optional<Integer> id, ModelMap model)
     {
         Page<User> pages = userService.getAllUser(id, 4, "id");
         model.addAttribute("pageable", pages);
-        return "user/list";
+        return "user/user-liste";
     }
 
 
     @GetMapping("/add")
     public String add(ModelMap model,User User) {
-        model.addAttribute("User", User);
+        model.addAttribute("user", User);
         return "user/user-edite";
     }
 
     @GetMapping("/add/{id}")
     public String edit(@PathVariable("id") long id, ModelMap model) throws ResourceNotFoundException {
-        model.addAttribute("User", userService.findById(id));
+        User user = userService.findById(id);
+        user.setPassword(null);
+        model.addAttribute("user", user);
         return "user/user-edite";
     }
 
     @PostMapping("/save")
-    public String saveUser(@Valid @ModelAttribute("User") User user, BindingResult result, ModelMap model) throws ResourceNotFoundException {
+    public String saveUser(@Valid @ModelAttribute("User") User user, BindingResult result, ModelMap model) throws ResourceNotFoundException , Exception{
         if(result.hasErrors()){
-            model.addAttribute("User",user);
-            return "user/user-register";
+            model.addAttribute("user",user);
+            return "user/user-edite";
         }
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+        if (user.getCreated() == null && user.getModified() == null){
+            user.setCreated(timestamp);
+            user.setModified(timestamp);
+        }else{
+            user.setModified(timestamp);
+        }
+        user.setPassword(SHA1.getSHA1(user.getPassword()));
         userService.save(user);
-        return "redirect:/user/";
+        return "redirect:/user/list";
     }
 
     @GetMapping("/delete/{page}/{id}")
@@ -76,13 +87,13 @@ public class UserController {
             System.out.println(result);
             return "user/user-login";
         }
-
         String hachedPass = SHA1.getSHA1(user.getPassword());
 
         if(userService.loginCheck(user.getEmail(), hachedPass)){
             System.out.println("Welcome Back");
             session.setAttribute("fullName", userService.findByEmail(user.getEmail()).getNom()+" " + userService.findByEmail(user.getEmail()).getPrenom());
             session.setAttribute("role", userService.findByEmail(user.getEmail()).getRole());
+            session.setAttribute("ConnectedUser", userService.findByEmail(user.getEmail()));
             session.setAttribute("image", "madeon.jpg");
             return "redirect:/article/";
         }else{

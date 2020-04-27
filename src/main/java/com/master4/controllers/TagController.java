@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Timestamp;
 import java.util.Optional;
 
 @Controller
@@ -24,7 +25,7 @@ public class TagController {
     @GetMapping(value = {"/","/page/{id}"})
     public String home(@PathVariable(name="id",required = false) Optional<Integer> id, ModelMap model)
     {
-            Page<Tag> pages = tagService.getAllTags(id, 1, "id");
+            Page<Tag> pages = tagService.getAllTags(id, 5, "id");
             model.addAttribute("pageable", pages);
         return "tag/tag-liste";
     }
@@ -33,20 +34,27 @@ public class TagController {
     @GetMapping("/add")
     public String add(ModelMap model,Tag tag) {
             model.addAttribute("tag", tag);
-       return "tag/add";
+       return "tag/tag-edite";
     }
 
     @GetMapping("/add/{id}")
     public String edit(@PathVariable("id") long id, ModelMap model) throws ResourceNotFoundException {
         model.addAttribute("tag", tagService.findById(id));
-        return "tag/add";
+        return "tag/tag-edite";
     }
 
     @PostMapping("/save")
     public String saveTag(@Valid @ModelAttribute("tag") Tag tag, BindingResult result, ModelMap model) throws ResourceNotFoundException {
         if(result.hasErrors()){
             model.addAttribute("tag",tag);
-            return "tags/add";
+            return "tag/tag-edite";
+        }
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        if (tag.getCreated() == null && tag.getModified() == null){
+            tag.setCreated(timestamp);
+            tag.setModified(timestamp);
+        }else{
+            tag.setModified(timestamp);
         }
         tagService.save(tag);
         return "redirect:/tag/";
@@ -57,10 +65,5 @@ public class TagController {
         tagService.deleteById(id);
         return "redirect:/tag/page/"+page;
     }
-
-
-
-
-
 
 }

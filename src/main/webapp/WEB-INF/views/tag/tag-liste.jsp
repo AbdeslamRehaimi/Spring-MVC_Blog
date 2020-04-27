@@ -17,7 +17,7 @@
     <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
     <style>
         .aColor {
-            color: #ffffff;
+            color: #000000;
         }
 
         .space_Section {
@@ -29,7 +29,7 @@
         }
 
         .bg-cool-blue {
-            background-color: #03579e!important;
+            background-color: #a0e5e8!important;
         }
 
         .icon-drop-user {
@@ -37,16 +37,16 @@
         }
         .icon-menu-space{
             margin-right: 50px;
-        } 
+        }
     </style>
 </head>
 <body>
 <div class="fluid">
-    <jsp:include page="../includes/main-navbar.jsp" />
+    <jsp:directive.include file="../includes/main-navbar.jsp" />
     <div class="jumbotron jumbotron-fluid bg-cool-blue">
         <div class="container">
             <h1 class="display-4 aColor">
-                Tags
+                Tags List
             </h1>
         </div>
     </div>
@@ -55,17 +55,16 @@
             <div class="col-md-12">
 
                 <input type="button" style="float: left; border-radius: 50px;" value="Nouveau Tag"
-                       onclick="window.location.href='${pageContext.request.contextPath}/article/add'; return false;"
+                       onclick="window.location.href='${pageContext.request.contextPath}/tag/add'; return false;"
                        class="btn btn-primary" />
 
                 <input type="button" style="text-align: center; border-radius: 50px;" value="Liste Users"
-                       onclick="window.location.href='${pageContext.request.contextPath}/tag/'; return false;"
+                       onclick="window.location.href='${pageContext.request.contextPath}/user/list'; return false;"
                        class="btn btn-primary" />
 
                 <input type="button" style="float: right;border-radius: 50px;" value="Liste Articles"
-                       onclick="window.location.href='${pageContext.request.contextPath}/users/'; return false;"
+                       onclick="window.location.href='${pageContext.request.contextPath}/article/'; return false;"
                        class="btn btn-primary" />
-
                 <br/><br/>
 
                 <div class="panel panel-info">
@@ -86,9 +85,9 @@
                                     <td>${item.created}</td>
                                     <td>${item.modified} </td>
                                     <td>
-                                        <a href="${pageContext.request.contextPath}/music/delete/${pageable.number}/${item.id}" class="btn btn-danger"
+                                        <a href="${pageContext.request.contextPath}/tag/delete/${pageable.number}/${item.id}" class="btn btn-danger"
                                            onclick="if (!(confirm('Voulez vous vraiment supprimer ce Tag?'))) return false">Delete</a>
-                                        <a href="${pageContext.request.contextPath}/music/add/${item.id}" class="btn btn-success">Modifier</a>
+                                        <a href="${pageContext.request.contextPath}/tag/add/${item.id}" class="btn btn-success">Modifier</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -124,6 +123,8 @@
             </div>
         </div>
     </div>
+
+    <jsp:directive.include file="../includes/footer.jsp"/>
 </div>
 </body>
 </html>
