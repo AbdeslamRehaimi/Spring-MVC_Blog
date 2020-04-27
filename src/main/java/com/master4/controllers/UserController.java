@@ -83,6 +83,7 @@ public class UserController {
             System.out.println("Welcome Back");
             session.setAttribute("fullName", userService.findByEmail(user.getEmail()).getNom()+" " + userService.findByEmail(user.getEmail()).getPrenom());
             session.setAttribute("role", userService.findByEmail(user.getEmail()).getRole());
+            session.setAttribute("image", "madeon.jpg");
             return "redirect:/article/";
         }else{
             user.setEmail(null);

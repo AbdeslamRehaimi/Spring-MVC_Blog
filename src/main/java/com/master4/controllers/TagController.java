@@ -26,20 +26,20 @@ public class TagController {
     {
             Page<Tag> pages = tagService.getAllTags(id, 1, "id");
             model.addAttribute("pageable", pages);
-        return "tags/home";
+        return "tag/tag-liste";
     }
 
 
     @GetMapping("/add")
     public String add(ModelMap model,Tag tag) {
             model.addAttribute("tag", tag);
-       return "tags/add";
+       return "tag/add";
     }
 
     @GetMapping("/add/{id}")
     public String edit(@PathVariable("id") long id, ModelMap model) throws ResourceNotFoundException {
         model.addAttribute("tag", tagService.findById(id));
-        return "tags/add";
+        return "tag/add";
     }
 
     @PostMapping("/save")

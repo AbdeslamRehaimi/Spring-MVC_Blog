@@ -1,4 +1,4 @@
-.artist-header {
+.user-header {
     position: relative;
     overflow: hidden;
     height: 324px;
@@ -8,7 +8,7 @@
     background-color: #350000;
 }
 
-.artist-profile {
+.user-profile {
     padding-top: 80px;
     width: 100%;
     position: relative;
@@ -25,7 +25,7 @@
     display: block;
 }
 
-.artist-contents {
+.user-contents {
     padding-top: 16px;
     min-height: 360px;
 }
