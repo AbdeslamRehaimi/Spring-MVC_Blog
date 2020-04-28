@@ -4,6 +4,7 @@ package com.master4.controllers;
 import com.master4.entities.Tag;
 import com.master4.exceptions.ResourceNotFoundException;
 import com.master4.services.TagService;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import java.sql.Timestamp;
 import java.util.Optional;
 
 @Controller
+@Aspect
 @RequestMapping("/tag")
 public class TagController {
 

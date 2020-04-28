@@ -41,6 +41,7 @@ public class AspectManager {
         } else {
             return articleController.redirect("article");
         }
+        return userController.redirect("");
     }
 
 
@@ -57,6 +58,7 @@ public class AspectManager {
         } else {
             return articleController.redirect("article");
         }
+        return userController.redirect("");
     }
 
     @Around("execution(* com.master4.controllers.TagController.delete(..)) || execution(* com.master4.controllers.TagController.add(..)) || execution(* com.master4.controllers.TagController.saveTag(..)) ")
@@ -72,6 +74,7 @@ public class AspectManager {
         } else {
             return articleController.redirect("article");
         }
+        return userController.redirect("");
     }
 
 

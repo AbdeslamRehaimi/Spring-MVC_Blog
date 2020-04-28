@@ -11,6 +11,7 @@ import com.master4.services.ArticleService;
 import com.master4.services.TagService;
 import com.master4.services.UserService;
 import lombok.SneakyThrows;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@Aspect
 @RequestMapping("/article")
 public class ArticleController {
 
