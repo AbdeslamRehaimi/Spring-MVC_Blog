@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="ckeditor" uri="http://ckeditor.com" %>
 <html>
 <head>
     <title>Title</title>
@@ -15,6 +16,8 @@
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
     <script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+    <script src="<c:url value="/resources/ckeditor/ckeditor.js" />"></script>
+    <script src="<c:url value="/resources/ckeditor/adapters/jquery.js" />"></script>
     <style>
         .aColor {
             color: #000000;
@@ -64,11 +67,11 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-md-6 offset-3 ">
-                    <br><br><br>
+                <div class="col-md-12">
                     <div >
                         <a style="float: left;" class="btn btn-danger" href="${pageContext.request.contextPath}/article/" >Returne</a>
                     </div>
+                    <br><br>
                     <div class="card" style="margin-top: 25px">
                         <div class="card-header">Article Edite</div>
                         <form:form method="post" action="${pageContext.request.contextPath}/article/save" modelAttribute="article">
@@ -88,7 +91,7 @@
 
                                 <div class="form-group col-md-12 required ">
                                     <label for="body">Texte</label>
-                                    <form:textarea path="body" cssClass="form-control"  placeholder="le Corps de l'article" />
+                                    <form:textarea path="body" id="editor" name="editor" cssClass="form-control" class="form-control is-invalid"/>
                                     <form:errors path="body" cssClass="alert-danger" />
 
                                 </div>
@@ -141,5 +144,10 @@
 
         <jsp:include page="../includes/footer.jsp" />
     </div>
+
+
+
+
+    <ckeditor:replace replace="editor" basePath="/resources/ckeditor/"/>
 </body>
 </html>
