@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.DynamicMBean;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.sql.Timestamp;
@@ -134,5 +135,11 @@ public class UserController {
 
     }
 
+
+    //Solution for AOP Technique
+    @GetMapping("/redirect")
+    public String redirect(String st) {
+        return "redirect:/"+st;
+    }
 
 }

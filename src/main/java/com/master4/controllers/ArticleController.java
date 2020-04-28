@@ -109,4 +109,11 @@ public class ArticleController {
         return "redirect:/article/page/"+page;
     }
 
+
+    //Solution for AOP Technique
+    @GetMapping("/redirect")
+    public String redirect(String st) {
+        return "redirect:/"+st;
+    }
+
 }

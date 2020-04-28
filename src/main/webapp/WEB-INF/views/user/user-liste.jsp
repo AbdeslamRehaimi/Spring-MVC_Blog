@@ -108,6 +108,7 @@
                                     <td>${item.prenom}</td>
                                     <td>${item.email} </td>
                                     <td>${item.role} </td>
+                                    <td>
                                     <c:choose>
                                         <c:when test="${role == 'Admin'}">
                                             <a href="${pageContext.request.contextPath}/user/delete/${pageable.number}/${item.id}" class="btn btn-danger"
