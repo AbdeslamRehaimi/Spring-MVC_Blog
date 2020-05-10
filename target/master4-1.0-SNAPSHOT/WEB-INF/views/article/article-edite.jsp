@@ -67,11 +67,11 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-md-6 offset-3 ">
-                    <br><br><br>
+                <div class="col-md-12">
                     <div >
                         <a style="float: left;" class="btn btn-danger" href="${pageContext.request.contextPath}/article/" >Returne</a>
                     </div>
+                    <br><br>
                     <div class="card" style="margin-top: 25px">
                         <div class="card-header">Article Edite</div>
                         <form:form method="post" action="${pageContext.request.contextPath}/article/save" modelAttribute="article">
@@ -91,10 +91,17 @@
 
                                 <div class="form-group col-md-12 required ">
                                     <label for="body">Texte</label>
-                                    <form:textarea path="body" id="editor" name="editor" cssClass="form-control" class="form-control is-invalid"/>
+                                    <form:textarea path="body" id="editor" name="editor" cssClass="form-control" class="form-control"/>
                                     <form:errors path="body" cssClass="alert-danger" />
 
                                 </div>
+
+                                <div class="form-group col-sm-12 required ">
+                                    <label>Image</label>
+                                    <form:input path="image" type="text" name="text" value="" class="form-control is-invalid"></form:input>
+                                    <form:errors path="image"  class="invalid-feedback"  cssStyle="color: red" />
+                                </div>
+
                                 <div class="form-check">
                                     <label class="form-check-label">
                                         Publier

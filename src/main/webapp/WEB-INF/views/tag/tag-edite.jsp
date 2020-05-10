@@ -68,10 +68,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-3 ">
-                <br><br><br>
                 <div >
                     <a style="float: left;" class="btn btn-danger" href="${pageContext.request.contextPath}/tag/" >Returne</a>
                 </div>
+                <br><br><br>
+
                 <div class="card" style="margin-top: 25px;margin-bottom: 50px;">
                     <div class="card-header">Tag</div>
                     <form:form method="post" action="${pageContext.request.contextPath}/tag/save" modelAttribute="tag">

@@ -89,12 +89,19 @@
                                    <input  style="border-radius: 150px;"  class="form-control" value="${fullName}"  placeholder="titre" disabled="true" />
                                 </div>
 
-                                <div class="form-group col-md-12 required ">
+                                <div class="form-group col-md-12  ">
                                     <label for="body">Texte</label>
-                                    <form:textarea path="body" id="editor" name="editor" cssClass="form-control" class="form-control is-invalid"/>
+                                    <form:textarea path="body" id="editor" name="editor" cssClass="form-control" class="form-control"/>
                                     <form:errors path="body" cssClass="alert-danger" />
 
                                 </div>
+
+                                <div class="form-group col-sm-12 required ">
+                                    <label>Image</label>
+                                    <form:input path="image" type="text" name="text" value="" class="form-control is-invalid"></form:input>
+                                    <form:errors path="image"  class="invalid-feedback"  cssStyle="color: red" />
+                                </div>
+
                                 <div class="form-check">
                                     <label class="form-check-label">
                                         Publier

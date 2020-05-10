@@ -51,9 +51,10 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public String saveUser(@Valid @ModelAttribute("User") User user, BindingResult result, ModelMap model) throws ResourceNotFoundException , Exception{
+    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult result, ModelMap model) throws ResourceNotFoundException , Exception{
         if(result.hasErrors()){
             model.addAttribute("user",user);
+            System.out.println(result);
             return "user/user-edite";
         }
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());

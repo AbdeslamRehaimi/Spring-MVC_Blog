@@ -55,7 +55,7 @@ public class Article implements Serializable {
     User user;
 
     @Size(min=1,message = "selectionner au moins une tag")
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="articles_tags", joinColumns={@JoinColumn(referencedColumnName="id")}
             , inverseJoinColumns={@JoinColumn(referencedColumnName="id")})
     List<Tag> tagList;

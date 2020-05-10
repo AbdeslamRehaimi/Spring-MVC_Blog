@@ -43,7 +43,17 @@
             text-align: justify;
             font-style: italic;
             font-family: cursive;
+            background-color: #ececec;
         }
+        .tag-item {
+            position: relative;
+            border-right-width: 0px;
+            border-radius: 15px;
+            background-color: #000000;
+            color: white;
+            border-color: #9327ff;
+        }
+
     </style>
 </head>
 <body>
@@ -120,7 +130,7 @@
                             <div class="col-md-4 col-sm-4 ">
                                 <h2>${item.title}</h2>
                                 <div class="blok1">
-                                    <img src="<c:url value="/resources/images/users/${image}"/>" alt="image" class="albimage">
+                                    <img src="<c:url value="/resources/images/users/${image}"/>" alt="image" class="albimage" height="200px">
                                     <div style="display: block; margin: 35px; align-items: center">
                                         <img src="<c:url value="/resources/images/users/${image}"/>" class="user" width="80px" height="80px">
 
@@ -136,6 +146,13 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div style="text-align: center">
+                <c:forEach items="${item.tagList}" var="tags">
+                    <a href="/" class="btn btn-sm tag-item" >
+                            ${tags.title}
+                    </a>
+                </c:forEach>
                 </div>
                 <p style="float: right; color: #20560a; font-family: initial;">Publier le: ${item.created} </p>
                 <hr style="width: 50%; color: black; background-color: black;">
