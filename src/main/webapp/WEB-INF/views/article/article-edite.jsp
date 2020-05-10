@@ -98,7 +98,15 @@
 
                                 <div class="form-group col-sm-12 required ">
                                     <label>Image</label>
-                                    <form:input path="image" type="text" name="text" value="" class="form-control is-invalid"></form:input>
+                                    <form:select path="image" name="image"  class="form-control"  >
+                                        <form:option value="">Choisirs</form:option>
+                                        <form:option value="01.jpg">Article 1</form:option>
+                                        <form:option value="02.jpg">Article 2</form:option>
+                                        <form:option value="03.jpg">Article 3</form:option>
+                                        <form:option value="04.jpg">Article 4</form:option>
+                                        <form:option value="05.jpg">Article 5</form:option>
+                                        <form:option value="No Image Provided !">Aucun</form:option>
+                                    </form:select>
                                     <form:errors path="image"  class="invalid-feedback"  cssStyle="color: red" />
                                 </div>
 

@@ -60,7 +60,15 @@
 
                         <div class="form-group col-sm-12 required ">
                             <label>Image</label>
-                            <form:input path="image" type="text" name="text" value="" class="form-control is-invalid"></form:input>
+                            <form:select path="image" name="image"  class="form-control"  >
+                                <form:option value="">Choisirs</form:option>
+                                <form:option value="01.jpg">User 1</form:option>
+                                <form:option value="03.jpg">User 2</form:option>
+                                <form:option value="04.jpg">User 3</form:option>
+                                <form:option value="05.jpg">User 4</form:option>
+                                <form:option value="06.jpg">User 5</form:option>
+                                <form:option value="No Image Provided !">Aucun</form:option>
+                            </form:select>
                             <form:errors path="image"  class="invalid-feedback"  cssStyle="color: red" />
                         </div>
 
@@ -70,8 +78,7 @@
                     </div>
                 </form:form>
                 <div class="text-center">
-                    <a class="d-block small mt-3" href="register.html">Login</a>
-                    <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+                    <a class="d-block small mt-3" href="${pageContext.request.contextPath}/">Login</a>
                 </div>
             </div>
         </div>

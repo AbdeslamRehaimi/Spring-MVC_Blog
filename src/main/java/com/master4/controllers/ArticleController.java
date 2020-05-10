@@ -49,7 +49,7 @@ public class ArticleController {
     @GetMapping(value = {"/","/page/{id}"})
     public String home(@PathVariable(name="id",required = false) Optional<Integer> id, ModelMap model)
     {
-        Page<Article> pages = articleService.getAllArticles(id, 3, "id");
+        Page<Article> pages = articleService.getAllArticles(id, 4, "id");
         model.addAttribute("pageable", pages);
         return "article/article-liste";
     }

@@ -44,6 +44,13 @@
             font-style: italic;
             font-family: cursive;
         }
+
+        .user-header {
+            margin-top: -50px;
+        }
+        .user-profile {
+            padding-top: 55px;
+        }
     </style>
 </head>
 <body>
@@ -70,7 +77,7 @@
 
             <div class="user-header">
                 <div class="user-profile">
-                    <img src="<c:url value="/resources/images/users/${image}"/>" class="user">
+                    <img src="<c:url value="/resources/images/users/${article.user.image}"/>" class="user">
                     <h1>${article.user.nom} ${article.user.prenom}</h1>
                 </div>
             </div>
@@ -95,6 +102,11 @@
                             <div class="card-body row">
                                 <div class="form-group col-sm-12 required">
                                     <div class="article">
+                                        <div style="text-align: center">
+                                            <img height="400px" width="800px" src="<c:url value="/resources/images/articles/${article.image}"/>">
+                                        </div>
+                                        <hr>
+                                        <br>
                                         ${article.body}
                                     </div>
                                 </div>

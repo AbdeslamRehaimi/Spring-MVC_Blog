@@ -96,7 +96,7 @@ public class UserController {
             session.setAttribute("fullName", userService.findByEmail(user.getEmail()).getNom()+" " + userService.findByEmail(user.getEmail()).getPrenom());
             session.setAttribute("role", userService.findByEmail(user.getEmail()).getRole());
             session.setAttribute("ConnectedUser", userService.findByEmail(user.getEmail()));
-            session.setAttribute("image", "madeon.jpg");
+            session.setAttribute("image", userService.findByEmail(user.getEmail()).getImage());
             return "redirect:/article/";
         }else{
             user.setEmail(null);

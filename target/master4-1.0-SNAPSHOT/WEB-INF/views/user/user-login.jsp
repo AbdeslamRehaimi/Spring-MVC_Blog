@@ -26,13 +26,13 @@
                     <div class="card-body row">
                         <div class="form-group col-sm-12 required">
                             <label>Email</label>
-                            <form:input path="email"  type="text" name="email" value="abdeslam.rehaimi@gmail.com" class="form-control is-invalid"></form:input>
+                            <form:input path="email"  type="text" name="email" value="abdeslam.rehaimi@gmail.com" class="form-control "></form:input>
                             <form:errors path="email"  class="invalid-feedback"  cssStyle="color: red" />
                         </div>
 
                         <div class="form-group col-md-12 required">
                             <label>Mot de pass</label>
-                            <form:input path="password" type="password" value="123456789" name="password" autocomplete="off" class="form-control is-invalid"></form:input>
+                            <form:input path="password" type="password" value="123456789" name="password" autocomplete="off" class="form-control "></form:input>
                             <form:errors path="password"  class="invalid-feedback"  cssStyle="color: red" />
                         </div>
 
@@ -44,7 +44,6 @@
                 </form:form>
                 <div class="text-center" style="text-align: center!important;">
                     <a class="d-block small mt-3" href="${pageContext.request.contextPath}/register">Register an Account</a>
-                    <a class="d-block small" href="${pageContext.request.contextPath}/reset">Forgot Password?</a>
                 </div>
             </div>
         </div>

@@ -130,11 +130,11 @@
                             <div class="col-md-4 col-sm-4 ">
                                 <h2>${item.title}</h2>
                                 <div class="blok1">
-                                    <img src="<c:url value="/resources/images/users/${image}"/>" alt="image" class="albimage" height="200px">
+                                    <img src="<c:url value="/resources/images/articles/${item.image}"/>" alt="image" class="albimage" height="200px">
                                     <div style="display: block; margin: 35px; align-items: center">
-                                        <img src="<c:url value="/resources/images/users/${image}"/>" class="user" width="80px" height="80px">
+                                        <img src="<c:url value="/resources/images/users/${item.user.image}"/>" class="user" width="80px" height="80px">
 
-                                        <a href="${pageContext.request.contextPath}/article/view/${item.id}" ><h2>${item.user.nom} ${item.user.prenom}</h2></a>
+                                        <a href="${pageContext.request.contextPath}/article/view/${item.id}" ><h2 style="text-align: center;"><em>${item.user.prenom}</em></h2></a>
                                     </div>
                                 </div>
                             </div>
