@@ -18,13 +18,15 @@
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             </ul>
             <ul class=" navbar-nav my-2 my-lg-0">
-                <li class="nav-item">
-                    <a style="color: white;" class="nav-link aColor">${fullName}</a>
+                <li class="nav-item" style="text-align: center;">
+                    <a style="color: white; margin-bottom: -12px;" class="nav-link aColor">${fullName}</a>
+                    <a class="small" href="${pageContext.request.contextPath}/disconnecte">Disconnecte</a>
                 </li>
                 <li class="nav-item">
                         <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img alt="AbdeslamRehaimi" class="avatar" src="<c:url value="/resources/images/users/${image}"/>" height="20" width="20">
                         </a>
+
                 </li>
             </ul>
         </div>

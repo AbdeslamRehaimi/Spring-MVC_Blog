@@ -55,8 +55,9 @@ public class ArticleController {
     }
 
     @RequestMapping("/view/{id}")
-    public String view(@PathVariable("id") long id,ModelMap model) throws ResourceNotFoundException {
+    public String view(@PathVariable("id") long id,ModelMap model, HttpSession session) throws ResourceNotFoundException {
         model.addAttribute("article",articleService.findById(id));
+        session.setAttribute("alreadyCreated",articleService.findById(id));
         return "article/article-show";
     }
 
@@ -92,18 +93,31 @@ public class ArticleController {
             model.addAttribute("article",article);
             return "article/article-edite";
         }
+        Article created = (Article) session.getAttribute("alreadyCreated");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        if (article.getCreated() == null && article.getModified() == null){
+
+        /*if (article.getCreated() == null && article.getModified() == null){
             article.setCreated(timestamp);
             article.setModified(timestamp);
         }else{
             article.setModified(timestamp);
+        }*/
+        if(created != null){
+            article.setModified(timestamp);
+            User userId = created.getUser();
+            article.setUser(userId);
+        }else{
+            User userId = (User) session.getAttribute("ConnectedUser");
+            article.setCreated(timestamp);
+            article.setUser(userId);
         }
-        User userId = (User) session.getAttribute("ConnectedUser");
-        article.setUser(userId);
         articleService.save(article);
+
+        session.removeAttribute("alreadyCreated");
         return "redirect:/article/";
     }
+
+
 
     @GetMapping("/delete/{page}/{id}")
     public String delete(@PathVariable("page") long page,@PathVariable("id") long id, ModelMap model) throws ResourceNotFoundException {

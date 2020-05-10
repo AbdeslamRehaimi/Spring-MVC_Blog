@@ -1,6 +1,9 @@
 package com.master4.config;
 
+import com.master4.filter.filter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
@@ -16,5 +19,11 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
+
+    //Filter thing
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{new filter()};
     }
 }

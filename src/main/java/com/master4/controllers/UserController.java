@@ -21,6 +21,7 @@ import org.aspectj.lang.annotation.Aspect;
 
 @Controller
 @RequestMapping(value = {"","/user"})
+//@RequestMapping(value = {"/user"})
 @Aspect
 public class UserController {
 
@@ -78,6 +79,12 @@ public class UserController {
 
     @GetMapping(value = {""})
     public String index( ModelMap model ,User user){
+        model.addAttribute("user", user);
+        return "redirect:/login";
+    }
+
+    @GetMapping(value = {"/login"})
+    public String indexRedirected( ModelMap model ,User user){
         model.addAttribute("user", user);
         return "user/user-login";
     }
@@ -141,6 +148,19 @@ public class UserController {
     @GetMapping("/redirect")
     public String redirect(String st) {
         return "redirect:/"+st;
+    }
+
+
+    //Disconnect to prevent filter issues, since the user is already connected we need to disconnect in order other user can connect else the session will never end.
+    @GetMapping(value = {"/disconnecte"})
+    public String disconnect( ModelMap model ,User user, HttpSession session){
+        session.removeAttribute("fullName");
+        session.removeAttribute("role");
+        session.removeAttribute("ConnectedUser");
+        session.removeAttribute("ConnectedUser");
+        session.invalidate();
+        model.addAttribute("user", user);
+        return "redirect:/login";
     }
 
 }

@@ -89,27 +89,27 @@
 
                                 <div class="form-group col-sm-12 required  ">
                                     <label>Email</label>
-                                    <form:input path="email" type="text" name="email" value="" class="form-control  "></form:input>
+                                    <form:input path="email" type="text" name="email" value="" class="form-control is-invalid "></form:input>
                                     <form:errors path="email"  class="invalid-feedback"  cssStyle="color: red" />
                                 </div>
 
 
                                 <div class="form-group col-md-6 required  ">
                                     <label>Mot de pass</label>
-                                    <form:input path="password" type="password" name="motdepasse" autocomplete="off" class="form-control  "></form:input>
+                                    <form:input path="password" type="password" name="motdepasse" autocomplete="off" class="form-control is-invalid "></form:input>
                                     <form:errors path="password"  class="invalid-feedback"  cssStyle="color: red" />
                                 </div>
 
 
                                 <div class="form-group col-md-6 required  ">
                                     <label>Retaper Password</label>
-                                    <form:input path="confirmedPassword" type="password" name="confirmedPassword" autocomplete="off" class="form-control  "></form:input>
+                                    <form:input path="confirmedPassword" type="password" name="confirmedPassword" autocomplete="off" class="form-control is-invalid  "></form:input>
                                     <form:errors path="confirmedPassword"  class="invalid-feedback"  cssStyle="color: red" />
                                 </div>
 
                                 <div class="form-group col-md-12 required  ">
                                     <label>Role</label>
-                                    <form:select path="role" name="role" class="form-control  ">
+                                    <form:select path="role" name="role" class="form-control is-invalid ">
                                         <form:option value="">-</form:option>
                                         <form:option value="Admin">Admin</form:option>
                                         <form:option value="Writer">Writer</form:option>
@@ -120,7 +120,7 @@
 
                                 <div class="form-group col-sm-12 required ">
                                     <label>Image</label>
-                                    <form:select path="image" name="image"  class="form-control"  >
+                                    <form:select path="image" name="image"  class="form-control "  >
                                         <form:option value="">Choisirs</form:option>
                                         <form:option value="01.jpg">User 1</form:option>
                                         <form:option value="03.jpg">User 2</form:option>
